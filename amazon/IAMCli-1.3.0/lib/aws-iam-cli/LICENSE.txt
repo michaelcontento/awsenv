@@ -1,0 +1,33 @@
+Identity and Access Management CLI Software License
+
+This Software License ("License") governs your use, reproduction, and distribution of the accompanying software as specified below.
+
+1. Definitions
+
+"Licensor" means Amazon.com, Inc., and its affiliates.
+
+"Software" means the original work of authorship made available under this License.
+
+The terms "reproduce," "reproduction," and "distribution" have the meaning as provided under U.S. copyright law.
+
+2. License Grant
+
+Subject to the terms and conditions of this License, Licensor grants to you a worldwide, non-exclusive, royalty-free, copyright license to reproduce, publicly display, and publicly perform the Software solely in object code form.
+
+3. Limitations
+
+3.1 Redistribution.  You may reproduce or distribute the Software only if (a) you do so under this License, (b) you include a complete copy of this License with your distribution, and (c) you retain without modification any copyright, patent, trademark, or attribution notices that are present in the Software.
+
+3.2 Use Limitation.  The Software may only be used with the web services, computing platforms or applications provided by Amazon.com, Inc. or its affiliates, including Amazon Web Services LLC.
+
+3.3 Patent Claims.  If you bring or threaten to bring a patent claim against Licensor (including any claim, cross-claim or counterclaim in a lawsuit) to enforce any patents that you allege are infringed by the Software, then your rights under this License (including the grants in Section 2) will terminate immediately.
+
+3.4 Trademarks.  This License does not grant any rights to use Licensorís or its affiliatesí names, logos, or trademarks, except as necessary to reproduce the notices described in this License.
+
+3.5 Termination.  If you violate any term of this License, then your rights under this License (including the grant in Sections 2) will terminate immediately.
+
+4. Disclaimer of Warranty.  THE WORK IS PROVIDED "AS IS" WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WARRANTIES OR CONDITIONS OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE OR NON-INFRINGEMENT.  YOU BEAR THE RISK OF UNDERTAKING ANY ACTIVITIES UNDER THIS LICENSE.  SOME STATESí CONSUMER LAWS DO NOT ALLOW EXCLUSION OF AN IMPLIED WARRANTY, SO THIS DISCLAIMER MAY NOT APPLY TO YOU.
+
+5. Limitation of Liability.  EXCEPT AS PROHIBITED BY APPLICABLE LAW, IN NO EVENT AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE SHALL ANY LICENSOR BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT OF OR RELATED TO THIS LICENSE, THE USE OR INABILITY TO USE THE WORK (INCLUDING BUT NOT LIMITED TO LOSS OF GOODWILL, BUSINESS INTERRUPTION, LOST PROFITS OR DATA, COMPUTER FAILURE OR MALFUNCTION, OR ANY OTHER COMMERCIAL DAMAGES OR LOSSES), EVEN IF THE LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+© 2011 Amazon.com, Inc. or its affiliates.  All rights reserved.

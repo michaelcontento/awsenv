@@ -1,0 +1,9 @@
+AWS CloudFormation Command Line Tools
+=========================================
+
+AWS CloudFormation CLI version 1.0.9 (API 2010-05-15)
+========================================================================
+* Added cfn-update-stack
+* API Version update to 2010-05-15
+* Added --capabilities to cfn-create-stack, cfn-delete-stack
+* Added capabilities to cfn-validate-template output.

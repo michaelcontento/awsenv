@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Check AWS_RDS_HOME
+if [ -z "${AWS_RDS_HOME}" ]; then
+        echo AWS_RDS_HOME is not set
+        exit 1
+fi
+
+export SERVICE_HOME=${AWS_RDS_HOME}
+
+exec "${AWS_RDS_HOME}/bin/service" "$@"

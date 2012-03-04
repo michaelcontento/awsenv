@@ -1,0 +1,10 @@
+# Client Configuration File
+# 
+# Enter your proxy server information in the following format. Uncomment the
+# settings ClientProxyUsername and ClientProxyPpassword, only if you require
+# a username and password pair to talk to your proxy server.
+
+ClientProxyHost=<Write your proxy server host name>
+ClientProxyPort=<Write your proxy server port number>
+#ClientProxyUsername=<Write your proxy server username>
+#ClientProxyPassword=<Write your proxy server password>

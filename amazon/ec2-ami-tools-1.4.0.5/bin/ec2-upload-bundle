@@ -1,0 +1,4 @@
+#!/bin/bash
+
+home=${EC2_AMITOOL_HOME:-${EC2_HOME:?Neither of EC2_AMITOOL_HOME or EC2_HOME environment variables are set}}
+ruby -I $home/lib ${home}/lib/ec2/amitools/uploadbundle.rb $*

@@ -1,0 +1,54 @@
+Auto Scaling Command Line Tools
+===============================
+
+Auto Scaling CLI version 1.0.49.1 (API 2011-01-01)
+===================================================
+* Tags Support added (as-create-or-update-tags, as-describe-tags,
+  as-delete-tags)
+* SNS Notification Support added (as-put-notification-configuration, 
+  as-describe-notification-configurations, 
+  as-describe-auto-scaling-notification-types, 
+  as-delete-notification-configuration).
+* --force-delete functionality added to as-delete-auto-scaling-group
+* AddToLoadBalancer process added to 
+  as-suspend-processes/as-resume-processes
+* Recurrence support added to as-put-scheduled-update-group-action
+* VPC security group id can be specified as part of 
+  as-create-launch-config's --group parameter
+
+Auto Scaling CLI version 1.0.33.1 (API 2010-08-01)
+===================================================
+* as-describe-scaling-activities output simplified 
+* as-create-launch-config allows 16k user data file
+
+Auto Scaling CLI version 1.0.4.4 (API 2009-05-15)
+===================================================
+* as-terminate-instance-in-auto-scaling-group bug for SOAP access
+  has been fixed
+* Other minor bug fixes
+* Better documentation
+
+Auto Scaling CLI version 1.0-1 (API 2009-05-15)
+==================================================
+
+Config changes
+--------------
+* Environment var AUTO_SCALING_HOME has been renamed to
+  AWS_AUTO_SCALING_HOME
+* Environment var AUTO_SCALING_URL has been renamed to
+  AWS_AUTO_SCALING_URL
+
+Command changes
+---------------
+* bin/as has been removed.
+* bin/service has been renamed bin/as-cmd.
+* All commands now have default 555 permissions.
+* For all command line options which accept a list of args, args
+  must now be separated by ",".
+* --accesskeyid has been renamed to --access-key-id
+* --secretkey has been renamed to --secret-key
+* All short options for optional arguments have been removed
+
+
+Auto Scaling CLI version 1.0 (API 2009-05-15)
+=================================================

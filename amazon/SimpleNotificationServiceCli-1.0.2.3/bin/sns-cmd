@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# This script passes the service dependent SERVICE_HOME to the common service script to run the command
+                                                                                
+                                                       
+# Check AWS_SNS_HOME
+if [ -z "${AWS_SNS_HOME}" ]; then
+        echo AWS_SNS_HOME is not set
+        exit 1
+fi
+                                                                                
+                                                       
+export SERVICE_HOME=${AWS_SNS_HOME}
+                                                                                
+                                                       
+exec "${AWS_SNS_HOME}/bin/service" "$@"

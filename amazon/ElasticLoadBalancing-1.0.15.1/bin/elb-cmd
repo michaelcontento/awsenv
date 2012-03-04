@@ -1,0 +1,12 @@
+#!/usr/bin/env bash 
+# This script passes the service dependent SERVICE_HOME to the common service script to run the command
+
+# Check AWS_ELB_HOME
+if [ -z "${AWS_ELB_HOME}" ]; then
+	echo AWS_ELB_HOME is not set
+	exit 1 
+fi
+
+export SERVICE_HOME=${AWS_ELB_HOME}
+
+exec "${AWS_ELB_HOME}/bin/service" "$@"

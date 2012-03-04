@@ -1,0 +1,134 @@
+Relational Data Service (RDS) Command Line Tools
+================================================
+
+Relational Database Service CLI version 1.6.001 (API 2012-01-15)
+================================================================
+* Added support for VPC RDS instances and security groups
+* Added support for DB subnet groups
+    * rds-describe-db-subnet-groups
+    * rds-create-db-subnet-group
+    * rds-modify-db-subnet-group
+    * rds-delete-db-subnet-group
+* Added support for filtering by SnapshotType
+    * rds-describe-db-snapshots
+* Added support for copying db snapshots
+    * rds-copy-db-snapshot
+* Changed API version to 2012-01-15
+
+Relational Database Service CLI version 1.5.001 (API 2011-12-19)
+================================================================
+* Added support for new reserved instances offering types. Updated following commands:
+    * rds-describe-reserved-db-instances
+    * rds-describe-reserved-db-instances-offerings
+* Changed API version to 2011-12-19
+
+Relational Database Service CLI version 1.4.007 (API 2011-04-01)
+================================================================
+* Added support for spaces in parameter names for rds-modify-db-parameter-group
+    * Example: rds-modify-db-parameter-group mygroup --parameters "name=init_connect, value='set autocommit=0', method=immediate"
+
+Relational Database Service CLI version 1.4.006 (API 2011-04-01)
+================================================================
+* Added support for describing available options
+    * rds-describe-orderable-db-instance-options
+* Added CurrencyCode support for Reserved Instance APIs
+    * rds-describe-reserved-db-instance-offerings
+    * rds-describe-reserved-db-instances
+* Added support for multiple license models
+    * rds-create-db-instance
+    * rds-restore-db-instance-from-db-snapshot
+    * rds-restore-db-instance-from-point-in-time
+* Added DBName and Engine as parameters to restore APIs
+    * rds-restore-db-instance-from-db-snapshot
+    * rds-restore-db-instance-to-point-in-time
+* Added DBEngineDescription and DBEngineVersionDescription
+    * rds-describe-db-engine-versions
+* Fixed output formatting (headers and help texts)
+* Changed API version to 2011-04-01
+
+Relational Database Service CLI version 1.3.003 (API 2010-07-28)
+================================================================
+* Added support for read-replicas
+    * Added rds-create-db-instance-read-replica command.
+    * Added Read Replica Source ID column and REPLICA sub-table to commands returning DB Instance descriptions.
+        
+* Changed API version to 2010-07-28
+
+Relational Database Service CLI version 1.2.006 (API 2010-06-28)
+================================================================
+* Added support for reserved database instances with the following commands:
+    * rds-describe-reserved-db-instances
+    * rds-describe-reserved-db-instances-offerings
+    * rds-purchase-reserved-db-instances-offering
+    
+* Added support for user version management
+    * Added rds-describe-db-engine-versions command.
+    * Added --engine-version and --auto-minor-version-upgrade arguments to following commands:
+        * rds-create-db-instance
+        * rds-modify-db-instance
+    * Added allow-major-version-upgrade argument to rds-modify-db-instance
+    * Added Version and Auto Minor Version Upgrade columns to the output of the following commands:
+        * rds-create-db-instance
+        * rds-delete-db-instance
+        * rds-describe-db-instances
+        * rds-modify-db-instance
+    * Added Version column to the output of the following commands:
+        * rds-create-db-snapshot
+        * rds-delete-db-snapshot
+        * rds-describe-db-snapshots
+    * Added Minimum Version column to output the following commands:
+        * rds-describe-db-parameters
+        * rds-describe-engine-default-parameters
+    * Renamed --engine to --db-parameter-group-family in rds-create-db-parameter-group.
+    * Renamed the Engine column to Parameter Group Family in the following commands:
+        * rds-create-db-parameter-group
+        * rds-describe-db-parameter-groups
+
+* Changed API version to 2010-06-28
+
+Relational Database Service CLI version 1.1.005 (API 2010-01-01)
+================================================================
+* Fixed issue which prevented authenticating with X.509 certificates
+
+Relational Database Service CLI version 1.1.004 (API 2010-01-01)
+================================================================
+* Added --multi-az parameter to following commands:
+    * rds-create-db-instance
+    * rds-modify-db-instance
+    * rds-restore-db-instance-from-db-snapshot
+    * rds-restore-db-instance-to-point-in-time
+
+* Added Multi-AZ field to output of:
+    * rds-describe-db-instances
+    * rds-create-db-instance
+    * rds-delete-db-instance
+    * rds-modify-db-instance
+    * rds-reboot-db-instance
+    * rds-restore-db-instance-from-db-snapshot
+    * rds-restore-db-instance-to-point-in-time
+    
+* Changed API version to 2010-01-01
+    
+Relational Database Service CLI version 1.0.006 (API 2009-10-16)
+================================================================
+* May now specify --region region-name to connect to the specified region's endpoint.
+
+Relational Database Service CLI version 1.0.005 (API 2009-10-16)
+================================================================
+* rds-describe-engine-default-parameters and rds-describe-db-parameters can now retrieve more than 100 rows.
+
+Relational Database Service CLI version 1.0.004 (API 2009-10-16)
+================================================================
+* Updated README.txt to document X.509 authentication.
+* Minor corrections to help text.
+* Fixed bug with X.509 support on Windows.
+
+Relational Database Service CLI version 1.0.003 (API 2009-10-16)
+================================================================
+* Minor corrections to help text.
+* Fixed issues with quoted cert/private-key paths in Windows.
+* Renamed EC2CertFile and EC2PrivateKeyFile to AWSCertFile and AWSPrivateKeyFile.
+
+Relational Database Service CLI version 1.0.002 (API 2009-10-16)
+================================================================
+* Implemented support for SOAP and X.509 certificates.

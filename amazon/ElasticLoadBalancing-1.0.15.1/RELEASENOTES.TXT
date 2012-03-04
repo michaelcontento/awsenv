@@ -1,0 +1,60 @@
+Elastic Load Balancing Command Line Tools
+=========================================
+
+
+Elastic Load Balancing CLI version 1.0.15.1 (API 2011-11-15)
+============================================================
+* API support for VPC integration
+
+Limitation
+----------
+In elb-create-lb-policy, each attribute value must not contain white-spaces.
+
+Elastic Load Balancing CLI version 1.0.14.3 (API 2011-08-15)
+============================================================
+* API support for generic policies
+
+Limitation
+----------
+In elb-create-lb-policy, each attribute value must not contain white-spaces.
+
+Elastic Load Balancing CLI version 1.0.12.0 (API 2011-04-05)
+============================================================
+* API support for Route53 integration
+
+Elastic Load Balancing CLI version 1.0.11.1 (API 2010-07-01)
+============================================================
+* Fix of SSL feature API when using X.509 Certs
+
+Elastic Load Balancing CLI version 1.0.10.0 (API 2010-07-01)
+============================================================
+* API support for SSL feature
+
+Elastic Load Balancing CLI version 1.0.9.3 (API 2009-11-25)
+===========================================================
+* Add support for Stickiness feature
+
+Elastic Load Balancing CLI version 1.0.3.4 (API 2009-05-15)
+===========================================================
+* Minor fixes
+
+Elastic Load Balancing CLI version 1.0-1 (API 2009-05-15)
+=========================================================
+
+Config changes
+--------------
+* Rename ELB_HOME -> AWS_ELB_HOME
+* Rename ELB_URL  -> AWS_ELB_URL
+
+Command changes
+---------------
+* Rename bin/service[.cmd] -> elb-cmd[.cmd]
+* Rename --accesskeyid -> --access-key-id
+* Rename --secretkey   -> --secret-key
+* Remove bin/elb
+* Change permissions for bin/* from 544 to 555
+
+
+Elastic Load Balancing CLI version 1.0 (API 2009-05-15)
+=======================================================
+
