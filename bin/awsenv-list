@@ -8,6 +8,10 @@ AWSENV_CURRENT="$(awsenv current)"
 
 ENVIRONMENTS="$(ls -1 "$AWSENV_ROOT/envs")"
 for environment in $ENVIRONMENTS; do
+    if [ "$environment" == "gitkeep" ]; then
+        continue
+    fi
+
     if [ "$environment" == "$AWSENV_CURRENT" ]; then
         echo -e "$environment \033[32m(current)\033[0m"
     else
