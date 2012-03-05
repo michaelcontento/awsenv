@@ -5,7 +5,9 @@ set -e
 
 if [ $# -eq 0 ]; then
     awsenv version
-    echo "error: you need to specify the environment to load."
+    echo "usage: awsenv init <environment>"
+    echo ""
+    echo "error: no argument given."
     echo "hint:  use '-' to load the environment selected with 'awsenv use'."
     exit 1
 fi
@@ -16,7 +18,8 @@ if [ "$1" == "-" ]; then
     CURRENT="$(awsenv current)"
 
     if [ "$CURRENT" == "" ]; then
-        echo "error: for '-' you have to set a environment first (via awsenv use)."
+        awsenv version
+        echo "error: you have to set a environment with 'awsenv use' first."
         exit 1
     fi
 else
@@ -26,6 +29,7 @@ fi
 ENVIRONMENT="$AWSENV_ROOT/envs/$CURRENT"
 
 if [ ! -d "$ENVIRONMENT" ]; then
+    awsenv version
     echo "error: there is no environment named '$CURRENT'."
     exit 1
 fi
