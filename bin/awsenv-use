@@ -6,6 +6,8 @@ set -e
 if [ $# -eq 0 ]; then
     awsenv version
     echo "usage: awsenv use <environment>"
+    echo ""
+    echo "error: no arguments given." >&2
     exit 1
 fi
 
@@ -20,7 +22,7 @@ AWSENV_ROOT="$(awsenv root)"
 ENVIRONMENT="$AWSENV_ROOT/envs/$NEW_CURRENT"
 
 if [ ! -d "$ENVIRONMENT" ]; then
-    echo "error: there is no environment named '$NEW_CURRENT'."
+    echo "error: there is no environment named '$NEW_CURRENT'." >&2
     exit 1
 fi
 
