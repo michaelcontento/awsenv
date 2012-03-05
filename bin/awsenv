@@ -12,7 +12,8 @@ case $COMMAND in
     * )
         COMMAND_PATH="$(command -v "awsenv-$COMMAND" || true)"
         if [ -z "$COMMAND_PATH" ]; then
-            echo "awsenv: no such command '$COMMAND'" >&2
+            awsenv version
+            echo "error: no such command '$COMMAND'" >&2
             exit 1
         fi
 
