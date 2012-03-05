@@ -4,7 +4,7 @@ set -e
 [ -n "$AWSENV_DEBUG" ] && set -x
 
 AWSENV_ROOT="$(awsenv root)"
-AMAZON_BIN="$AWSENV_ROOT/amazon-bin"
+AMAZON_BIN="$AWSENV_ROOT/amazon/bin"
 
 if [ -d "$AMAZON_BIN" ]; then
     rm -f "$AMAZON_BIN/*"
