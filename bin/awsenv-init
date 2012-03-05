@@ -12,8 +12,6 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-AWSENV_ROOT="$(awsenv root)"
-
 if [ "$1" == "-" ]; then 
     CURRENT="$(awsenv current)"
 
@@ -26,6 +24,7 @@ else
     CURRENT="$1"
 fi
 
+AWSENV_ROOT="$(awsenv root)"
 ENVIRONMENT="$AWSENV_ROOT/envs/$CURRENT"
 
 if [ ! -d "$ENVIRONMENT" ]; then
@@ -34,7 +33,102 @@ if [ ! -d "$ENVIRONMENT" ]; then
     exit 1
 fi
 
+function exportAwsEnvGlobals() 
+{
+    echo ""
+    echo "# Let others detect us" 
+    echo "export AWSENV_LOADED=1"
+    echo "export AWSENV_NAME='$CURRENT'"
+}
+
+function exportNewPath()
+{
+    echo ""
+    echo "# Append the combined bin-path to the users PATH"
+    echo "export PATH=\"$AWSENV_ROOT/amazon-bin:\$PATH\""
+}
+
+function exportAwsHomeDirectories()
+{
+    echo ""
+    echo "# Home directories for all CLI tools"
+    echo "export AWS_AUTO_SCALING_HOME='$(echo "$AWSENV_ROOT/amazon/AutoScaling-"*)'"
+    echo "export AWS_CLOUDFORMATION_HOME='$(echo "$AWSENV_ROOT/amazon/AWSCloudFormation-"*)'"
+    echo "export AWS_CLOUDWATCH_HOME='$(echo "$AWSENV_ROOT/amazon/CloudWatch-"*)'"
+    echo "export AWS_ELASTICACHE_HOME='$(echo "$AWSENV_ROOT/amazon/AmazonElastiCacheCli-"*)'"
+    echo "export AWS_ELB_HOME='$(echo "$AWSENV_ROOT/amazon/ElasticLoadBalancing-"*)'"
+    echo "export AWS_IAM_HOME='$(echo "$AWSENV_ROOT/amazon/IAMCli-"*)'"
+    echo "export AWS_RDS_HOME='$(echo "$AWSENV_ROOT/amazon/RDSCli-"*)'"
+    echo "export AWS_SNS_HOME='$(echo "$AWSENV_ROOT/amazon/SimpleNotificationServiceCli-"*)'"
+    echo "export EC2_AMITOOL_HOME='$(echo "$AWSENV_ROOT/amazon/ec2-ami-tools-"*)'"
+    echo "export EC2_HOME='$(echo "$AWSENV_ROOT/amazon/ec2-api-tools-"*)'"
+}
+
+function exportAwsCredentials()
+{
+    local AWS_CREDENTIAL_FILE="$(echo "$ENVIRONMENT/credentials"*)"
+    local EC2_ACCESS_KEY="$(grep "AWSAccessKeyId" "$AWS_CREDENTIAL_FILE" | cut -d"=" -f2)"
+    local EC2_SECRET_KEY="$(grep "AWSSecretKey"   "$AWS_CREDENTIAL_FILE" | cut -d"=" -f2)"
+    local EC2_CERT="$(echo "$ENVIRONMENT/cert-"*)"
+    local EC2_PRIVATE_KEY="$(echo "$ENVIRONMENT/pk-"*)"
+
+    echo ""
+    echo "# Path to the credentials / keys"
+    echo "export AWS_CREDENTIAL_FILE='$AWS_CREDENTIAL_FILE'"
+    echo "export EC2_CERT='$EC2_CERT'"
+    echo "export EC2_PRIVATE_KEY='$EC2_PRIVATE_KEY'"
+    echo ""
+    echo "# EC2 still needs the keys as separate variables"
+    echo "export EC2_ACCESS_KEY='$EC2_ACCESS_KEY'"
+    echo "export EC2_SECRET_KEY='$EC2_SECRET_KEY'"
+}
+
+function exportAwsIdentityFile()
+{
+    local AWS_IDENTITY_FILE="$(echo "$ENVIRONMENT/"*"-keypair")"
+
+    echo ""
+    echo "# Default ssh key"
+    echo "export AWS_IDENTITY_FILE='$AWS_IDENTITY_FILE'"
+    echo "export AWS_SSH_KEY_ID='$(basename "$AWS_IDENTITY_FILE")'"
+
+    if [ -f "$AWS_IDENTITY_FILE" ] \
+    && [ -x "$(command -v ssh-add || true)" ]; then
+        echo "# ... also added to your ssh agent"
+        chmod 600 "$AWS_IDENTITY_FILE"
+        ssh-add "$AWS_IDENTITY_FILE" &> /dev/null
+    fi
+}
+
+function exportJavaHome() 
+{
+    local OSX_JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home/"
+    local UBUNTU_JAVA_HOME="/usr/lib/jvm/java-6-openjdk/"
+    
+    echo ""
+    echo "# Try to ensure a valid JAVA_HOME"
+    if [ "$JAVA_HOME" != "" ]; then
+        echo "# ... already set and we obey"
+    elif [ -d "$OSX_JAVA_HOME" ]; then
+        echo "export JAVA_HOME='$OSX_JAVA_HOME'"
+    elif [ -d "$UBUNTU_JAVA_HOME" ]; then
+        echo "export JAVA_HOME='$UBUNTU_JAVA_HOME'"
+    else
+        echo "error: unable to detect JAVA_HOME" >&2
+        exit 1
+    fi
+}
+
+# Stop if the there is something wrong with the environment 
+awsenv validate "$ENVIRONMENT"
+
+# Be sure that the amazon-bin folder is filled properly and up to date
 awsenv rehash
 
-echo "error: not implemented yet." >&2
-exit 1
+# And now export everything
+exportAwsEnvGlobals
+exportNewPath
+exportAwsHomeDirectories
+exportAwsCredentials
+exportAwsIdentityFile
+exportJavaHome

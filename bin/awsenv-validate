@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$AWSENV_DEBUG" ] && set -x
+
+# TODO Implement this
+
+exit 0
