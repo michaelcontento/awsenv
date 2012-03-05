@@ -40,7 +40,7 @@ utility.
 
     $ exec $SHELL
 
-## Upgradading
+## Upgrading
 
 If you've installed [awsenv][] using the instructions above, you can upgrade your
 installation at any time using git.
