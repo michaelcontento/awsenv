@@ -10,13 +10,15 @@ do one thing well. It also includes the latest versions of the [AWS][] CLI tools
 [awsenv][] is heavily inspired by [rbenv][] from [sstephenson][]. Thanks for
 this awesome tool!
 
-## How It Works
+## How it works
 
 [awsenv][] operates on the per-user directory `~/.awsenv`. Environments in
 [awsenv][] correspond to subdirectories of `~/.awsenv/envs`. For example, you
 might have `~/.awsenv/envs/acme-corporation` and `~/.awsenv/envs/private`.
 
 ## Installation
+
+### Basic checkout
 
 1. Check out [awsenv][] into `~/.awsenv`.
 
@@ -40,17 +42,17 @@ utility.
 
         $ exec $SHELL
 
-## Upgrading
+### Upgrading
 
 If you've installed [awsenv][] using the instructions above, you can upgrade your
-installation at any time using git.
+installation at any time using [git][].
 
 To upgrade to the latest development version of [awsenv][], use `git pull`:
 
     $ cd ~/.awsenv
     $ git pull
 
-Or use the builtin update method:
+Or use the builtin update command:
 
     $ awsenv update
 
