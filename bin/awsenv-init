@@ -45,7 +45,7 @@ function exportNewPath()
 {
     echo ""
     echo "# Append the combined bin-path to the users PATH"
-    echo "export PATH=\"$AWSENV_ROOT/amazon-bin:\$PATH\""
+    echo "export PATH=\"$AWSENV_ROOT/amazon/bin:\$PATH\""
 }
 
 function exportAwsHomeDirectories()
@@ -122,7 +122,7 @@ function exportJavaHome()
 # Stop if the there is something wrong with the environment 
 awsenv validate "$ENVIRONMENT"
 
-# Be sure that the amazon-bin folder is filled properly and up to date
+# Be sure that the amazon/bin folder is filled properly and up to date
 awsenv rehash
 
 # And now export everything
