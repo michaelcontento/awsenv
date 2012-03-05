@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$AWSENV_DEBUG" ] && set -x
+
+if [ $# -eq 0 ]; then
+    awsenv version
+    echo "error: you need to specify the environment to load."
+    echo "hint:  use '-' to load the environment selected with 'awsenv use'."
+    exit 1
+fi
+
+AWSENV_ROOT="$(awsenv root)"
+
+if [ "$1" == "-" ]; then 
+    CURRENT="$(awsenv current)"
+
+    if [ "$CURRENT" == "" ]; then
+        echo "error: for '-' you have to set a environment first (via awsenv use)."
+        exit 1
+    fi
+else
+    CURRENT="$1"
+fi
+
+ENVIRONMENT="$AWSENV_ROOT/envs/$CURRENT"
+
+if [ ! -d "$ENVIRONMENT" ]; then
+    echo "error: there is no environment named '$CURRENT'."
+    exit 1
+fi
+
+awsenv rehash
+
+echo "error: not implemented yet."
+exit 1

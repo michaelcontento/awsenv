@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$AWSENV_DEBUG" ] && set -x
+
+AWSENV_ROOT="$(awsenv root)"
+CURRENT_FILE="$AWSENV_ROOT/current"
+
+if [ ! -f "$CURRENT_FILE" ]; then
+    echo ""
+    exit 0
+fi
+
+CURRENT="$(cat $CURRENT_FILE)"
+
+if [ ! -d "$AWSENV_ROOT/envs/$CURRENT" ]; then
+    echo ""
+    exit 0
+fi
+
+echo "$CURRENT"

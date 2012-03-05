@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$AWSENV_DEBUG" ] && set -x
+
+AWSENV_ROOT="$(awsenv root)"
+AMAZON_BIN="$AWSENV_ROOT/amazon-bin"
+
+if [ -d "$AMAZON_BIN" ]; then
+    rm -f "$AMAZON_BIN/*"
+else
+    mkdir "$AMAZON_BIN"
+fi
+
+find "$AWSENV_ROOT/amazon" \
+    -type f \
+    -wholename "*/bin/*" \
+    -and \
+    -not -name "*.cmd" \
+    -exec ln -sf "{}" "$AMAZON_BIN" \;

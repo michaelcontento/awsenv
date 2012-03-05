@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$AWSENV_DEBUG" ] && set -x
+
+COMMAND=$1
+case $COMMAND in 
+    "" | "-h" | "--help") 
+        awsenv help
+        ;;
+
+    * )
+        COMMAND_PATH="$(command -v "awsenv-$COMMAND" || true)"
+        if [ -z "$COMMAND_PATH" ]; then
+            echo "awsenv: no such command '$COMMAND'" >&2
+            exit 1
+        fi
+
+        shift 1
+        exec "$COMMAND_PATH" "$@"
+        ;;
+esac

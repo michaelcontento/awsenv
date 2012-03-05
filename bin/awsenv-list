@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$AWSENV_DEBUG" ] && set -x
+
+AWSENV_ROOT="$(awsenv root)"
+AWSENV_CURRENT="$(awsenv current)"
+
+ENVIRONMENTS="$(ls -1 "$AWSENV_ROOT/envs")"
+for environment in $ENVIRONMENTS; do
+    if [ "$environment" == "$AWSENV_CURRENT" ]; then
+        echo -e "$environment \033[32m(current)\033[0m"
+    else
+        echo "$environment"
+    fi
+done
