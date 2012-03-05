@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$AWSENV_DEBUG" ] && set -x
+
+cd "$(awsenv root)"
+git pull
