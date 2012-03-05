@@ -22,6 +22,7 @@ AWSENV_ROOT="$(awsenv root)"
 ENVIRONMENT="$AWSENV_ROOT/envs/$NEW_CURRENT"
 
 if [ ! -d "$ENVIRONMENT" ]; then
+    awsenv version
     echo "error: there is no environment named '$NEW_CURRENT'." >&2
     exit 1
 fi
