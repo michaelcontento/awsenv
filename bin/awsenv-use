@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$AWSENV_DEBUG" ] && set -x
+
+if [ $# -eq 0 ]; then
+    awsenv version
+    echo "usage: awsenv use <environment>"
+    exit 1
+fi
+
+NEW_CURRENT="$1"
+OLD_CURRENT="$(awsenv current)"
+
+if [ "$OLD_CURRENT" == "$NEW_CURRENT" ]; then
+    exit 0
+fi
+
+AWSENV_ROOT="$(awsenv root)"
+ENVIRONMENT="$AWSENV_ROOT/envs/$NEW_CURRENT"
+
+if [ ! -d "$ENVIRONMENT" ]; then
+    echo "error: there is no environment named '$NEW_CURRENT'."
+    exit 1
+fi
+
+echo "$NEW_CURRENT" > "$AWSENV_ROOT/current"
+
+awsenv version
+echo "notice: the environment has to be activated with: eval \"\$(awsenv init -)\""
