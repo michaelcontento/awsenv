@@ -20,25 +20,25 @@ might have `~/.awsenv/envs/acme-corporation` and `~/.awsenv/envs/private`.
 
 1. Check out [awsenv][] into `~/.awsenv`.
 
-    $ git clone git://github.com/michaelcontento/awsenv.git "$HOME/.awsenv"
+        $ git clone git://github.com/michaelcontento/awsenv.git "$HOME/.awsenv"
 
 2. Add `~/.awsenv/bin` to your `$PATH` for access to the [awsenv][] command-line
 utility.
 
-    $ echo 'export PATH="$HOME/.awsenv/bin:$PATH"' >> ~/.bash_profile
+        $ echo 'export PATH="$HOME/.awsenv/bin:$PATH"' >> ~/.bash_profile
 
     **Zsh note:** Modify your `~/.zshenv` file instead of `~/.bash_profile`.
 
 3. Add `awsenv init` to your shell to load the default environment.
 
-    $ echo 'eval "$(awsenv init -)" >> ~/.bash_profile'
+        $ echo 'eval "$(awsenv init -)" >> ~/.bash_profile'
 
     **Zsh note:** Modify your `~/.zshenv` file instead of `~/.bash_profile`.
 
 4. Restart your shell so the path changes take effect. You can now begin using
 [awsenv][].
 
-    $ exec $SHELL
+        $ exec $SHELL
 
 ## Upgrading
 
