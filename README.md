@@ -7,8 +7,7 @@ simple, unobtrusive, and follows the UNIX tradition of single-purpose tool that
 do one thing well. It also includes the latest versions of the [AWS][] CLI tools
 , so that you're ready to go in few seconds.
 
-[awsenv][] is heavily inspired by [rbenv][] from [sstephenson][]. Thanks for
-this awesome tool!
+[awsenv][] is heavily inspired by [rbenv][] from [sstephenson][].
 
 ## How it works
 
