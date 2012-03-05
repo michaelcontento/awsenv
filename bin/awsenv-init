@@ -16,8 +16,8 @@ if [ "$1" == "-" ]; then
     CURRENT="$(awsenv current)"
 
     if [ "$CURRENT" == "" ]; then
-        awsenv version
-        echo "error: you have to set a environment with 'awsenv use' first." >&2
+        echo "# $(awsenv version)"
+        echo "# error: you have to set a environment with 'awsenv use' first."
         exit 1
     fi
 else
