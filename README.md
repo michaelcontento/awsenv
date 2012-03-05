@@ -32,7 +32,7 @@ utility.
 
 3. Add `awsenv init` to your shell to load the default environment.
 
-        $ echo 'eval "$(awsenv init -)" >> ~/.bash_profile'
+        $ echo 'eval "$(awsenv init -)"' >> ~/.bash_profile
 
     **Zsh note:** Modify your `~/.zshenv` file instead of `~/.bash_profile`.
 
