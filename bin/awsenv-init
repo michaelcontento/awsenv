@@ -7,7 +7,7 @@ if [ $# -eq 0 ]; then
     awsenv version
     echo "usage: awsenv init <environment>"
     echo ""
-    echo "error: no argument given."
+    echo "error: no argument given." >&2
     echo "hint:  use '-' to load the environment selected with 'awsenv use'."
     exit 1
 fi
@@ -19,7 +19,7 @@ if [ "$1" == "-" ]; then
 
     if [ "$CURRENT" == "" ]; then
         awsenv version
-        echo "error: you have to set a environment with 'awsenv use' first."
+        echo "error: you have to set a environment with 'awsenv use' first." >&2
         exit 1
     fi
 else
@@ -30,11 +30,11 @@ ENVIRONMENT="$AWSENV_ROOT/envs/$CURRENT"
 
 if [ ! -d "$ENVIRONMENT" ]; then
     awsenv version
-    echo "error: there is no environment named '$CURRENT'."
+    echo "error: there is no environment named '$CURRENT'." >&2
     exit 1
 fi
 
 awsenv rehash
 
-echo "error: not implemented yet."
+echo "error: not implemented yet." >&2
 exit 1
