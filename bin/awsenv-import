@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$AWSENV_DEBUG" ] && set -x
+
+if [ $# -lt 2 ]; then
+    awsenv version
+    echo "usage: awsenv import <type> <path> [alias]"
+    echo ""
+    echo "error: not enough arguments given." >&2
+    exit 1
+fi
+
+TYPE="$1"
+PATH_="$2"
+ALIAS="$3"
+
+awsenv "import-$TYPE" "$PATH_" "$ALIAS"

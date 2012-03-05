@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$AWSENV_DEBUG" ] && set -x
+
+if [ $# -eq 0 ]; then
+    awsenv version
+    echo "usage: awsenv import-git <path> [alias]"
+    echo ""
+    echo "error: no arguments given." >&2
+    exit 1
+fi
+
+AWSENV_ROOT="$(awsenv root)"
+cd "$AWSENV_ROOT/envs" 
+
+PATH_="$1"
+ALIAS="$2"
+
+if [ "$ALIAS" != "" ]; then
+    git clone -q "$PATH_" "$ALIAS"
+else
+    git clone -q "$PATH_"
+fi
+
+awsenv version
+echo "notice: the environment has to be selected / activated."
+echo "hint:   'awsenv use' and 'awsenv init' are the commands you're looking for."
