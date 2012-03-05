@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$AWSENV_DEBUG" ] && set -x
+
+awsenv version
+echo "usage: awsenv <command> [<args>]"
+echo ""
+echo "Some useful awsenv commands are:"
+echo "    current  Returns the currently selected environment"
+echo "    help     Print this help"
+echo "    init     Configure the current session"
+echo "    list     A list of all available environments"
+echo "    rehash   Rebuild the symlink for all Amazon CLI tools"
+echo "    root     Returns the path where awsenv is installed"
+echo "    version  Print the version number"
+echo ""
+echo "For full documentation, see: https://github.com/michaelcontento/awsenv"
