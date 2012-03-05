@@ -3,5 +3,9 @@
 amazon-bin/*
 !amazon-bin/gitkeep
 
+# Contains the users environments and SHOULD NOT be commited
+envs/*
+!envs/gitkeep
+
 # This file contains the currently selected environment
 current
