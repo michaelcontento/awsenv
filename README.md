@@ -1,4 +1,4 @@
-# [awsenv][] Simple AWS Environment Management 
+# Simple AWS Environment Management 
 
 [awsenv][] lets you easily switch between multiple [AWS][] environments. It's
 simple, unobtrusive, and follows the UNIX tradition of single-purpose tool that
@@ -113,14 +113,14 @@ Display a list of all currently installed environments.
 ### awsenv rehash
 
 The [AWS][] CLI tools are located in `~/.awsenv/amazon` and *every* tool has his
-own `/bin` directory for the executables. But if we would use these your `PATH`
+own `/bin` directory for the executables. But if we would use these, your `PATH`
 variable would be unreadable long. [awsenv][] avoids this by creating symlinks
 for all executables in one directory called `~/.awsenv/amazon/bin`. And creating
 these symlinks is the job of `awsenv rehash`.
 
     $ awsenv rehash
 
-## awsenv import
+### awsenv import
 
 This command helps you to import environments into [awsenv][]. Just read the 
 help of this command, checkout the [awsenv-example-env][] repository and you 
