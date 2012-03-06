@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$AWSENV_DEBUG" ] && set -x
+
+AWSENV_ROOT="$(awsenv root)"
+DEFAULT_FILE="$AWSENV_ROOT/default"
+
+if [ ! -f "$DEFAULT_FILE" ]; then
+    echo ""
+    exit 0
+fi
+
+DEFAULT="$(cat $DEFAULT_FILE)"
+
+if [ ! -d "$AWSENV_ROOT/envs/$DEFAULT" ]; then
+    echo ""
+    exit 0
+fi
+
+echo "$DEFAULT"

@@ -7,7 +7,7 @@ awsenv version
 echo "usage: awsenv <command> [<args>]"
 echo ""
 echo "Some useful awsenv commands are:"
-echo "   current     Returns the currently selected environment"
+echo "   default     Returns the default environment used for 'awsenv init -'"
 echo "   help        Print this help"
 echo "   import      Import new environments easily into awsenv"
 echo "   init        Configure the current session"

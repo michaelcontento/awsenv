@@ -98,7 +98,7 @@ variables:
 ### awsenv use
 
 Set the global environment name to be used in all shells by writing the name to
-the `~/.awsenv/current` file.
+the `~/.awsenv/default` file.
 
     $ awsenv use acme-corporation
 

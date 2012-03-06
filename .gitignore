@@ -2,7 +2,7 @@
 !*.jar
 
 # The amazon/bin folder contains symlinks to the real executables. We don't need
-# to track those files, because they are generated with "awsenv rehash".
+# to track those files, because they are generated with awsenv-rehash.
 amazon/bin/*
 !amazon/bin/gitkeep
 
@@ -10,5 +10,5 @@ amazon/bin/*
 envs/*
 !envs/gitkeep
 
-# This file contains the currently selected environment
-current
+# This file contains the default environment for awsenv-init 
+default

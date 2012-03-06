@@ -4,7 +4,7 @@ set -e
 [ -n "$AWSENV_DEBUG" ] && set -x
 
 AWSENV_ROOT="$(awsenv root)"
-AWSENV_CURRENT="$(awsenv current)"
+AWSENV_DEFAULT="$(awsenv default)"
 
 ENVIRONMENTS="$(ls -1 "$AWSENV_ROOT/envs")"
 for environment in $ENVIRONMENTS; do
@@ -12,8 +12,8 @@ for environment in $ENVIRONMENTS; do
         continue
     fi
 
-    if [ "$environment" == "$AWSENV_CURRENT" ]; then
-        echo -e "$environment \033[32m(current)\033[0m"
+    if [ "$environment" == "$AWSENV_DEFAULT" ]; then
+        echo -e "$environment \033[32m(default)\033[0m"
     else
         echo "$environment"
     fi
