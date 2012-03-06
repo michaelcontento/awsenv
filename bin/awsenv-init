@@ -13,23 +13,23 @@ if [ $# -eq 0 ]; then
 fi
 
 if [ "$1" == "-" ]; then 
-    CURRENT="$(awsenv current)"
+    DEFAULT="$(awsenv default)"
 
-    if [ "$CURRENT" == "" ]; then
+    if [ "$DEFAULT" == "" ]; then
         echo "# $(awsenv version)"
         echo "# error: you have to set a environment with 'awsenv use' first."
         exit 1
     fi
 else
-    CURRENT="$1"
+    DEFAULT="$1"
 fi
 
 AWSENV_ROOT="$(awsenv root)"
-ENVIRONMENT="$AWSENV_ROOT/envs/$CURRENT"
+ENVIRONMENT="$AWSENV_ROOT/envs/$DEFAULT"
 
 if [ ! -d "$ENVIRONMENT" ]; then
     awsenv version
-    echo "error: there is no environment named '$CURRENT'." >&2
+    echo "error: there is no environment named '$DEFAULT'." >&2
     exit 1
 fi
 
@@ -38,7 +38,7 @@ function exportAwsEnvGlobals()
     echo ""
     echo "# Let others detect us" 
     echo "export AWSENV_LOADED=1"
-    echo "export AWSENV_NAME='$CURRENT'"
+    echo "export AWSENV_NAME='$DEFAULT'"
 }
 
 function exportNewPath()

@@ -11,23 +11,23 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-NEW_CURRENT="$1"
-OLD_CURRENT="$(awsenv current)"
+NEW_DEFAULT="$1"
+OLD_DEFAULT="$(awsenv default)"
 
-if [ "$OLD_CURRENT" == "$NEW_CURRENT" ]; then
+if [ "$OLD_DEFAULT" == "$NEW_DEFAULT" ]; then
     exit 0
 fi
 
 AWSENV_ROOT="$(awsenv root)"
-ENVIRONMENT="$AWSENV_ROOT/envs/$NEW_CURRENT"
+ENVIRONMENT="$AWSENV_ROOT/envs/$NEW_DEFAULT"
 
 if [ ! -d "$ENVIRONMENT" ]; then
     awsenv version
-    echo "error: there is no environment named '$NEW_CURRENT'." >&2
+    echo "error: there is no environment named '$NEW_DEFAULT'." >&2
     exit 1
 fi
 
-echo "$NEW_CURRENT" > "$AWSENV_ROOT/current"
+echo "$NEW_DEFAULT" > "$AWSENV_ROOT/default"
 
 awsenv version
 echo "notice: the environment has to be activated with: eval \"\$(awsenv init -)\""
