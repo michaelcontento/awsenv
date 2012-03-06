@@ -3,15 +3,42 @@
 set -e
 [ -n "$AWSENV_DEBUG" ] && set -x
 
+# Currently we only support this one argument
+if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
+    FORCED=1
+else
+    FORCED=0
+fi
+
+# Arguments given but NOT the forced flag? Wrong usage!
+if [ $FORCED -eq 0 ] && [ $# -ne 0 ]; then
+    awsenv version
+    echo "usage: awsenv rehash [-f|--force]"
+    echo ""
+    echo "error: invalid first arguments given." >&2
+    exit 1
+fi
+
 AWSENV_ROOT="$(awsenv root)"
 AMAZON_BIN="$AWSENV_ROOT/amazon/bin"
+FILES_FOUND=$(ls -1 "$AMAZON_BIN" \
+    | grep -v gitkeep \
+    | head -n-1 \
+    | wc -l)
 
+if [ "$FILES_FOUND" != "0" ] \
+&& [ $FORCED -eq 0 ]; then
+    exit 0
+fi
+
+# Clear the old symlinks to catch commands dropped by amazon
 if [ -d "$AMAZON_BIN" ]; then
     rm -f "$AMAZON_BIN/*"
 else
     mkdir "$AMAZON_BIN"
 fi
 
+# TODO Detect and handle errors here
 find "$AWSENV_ROOT/amazon" \
     -type f \
     -wholename "*/bin/*" \
