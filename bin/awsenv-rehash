@@ -31,7 +31,7 @@ if [ "$FILES_FOUND" != "0" ] \
     exit 0
 fi
 
-# Clear the old symlinks to catch commands dropped by amazon
+# Clear old symlink to keep in sync with amazon (e.g. when commands are removed) 
 if [ -d "$AMAZON_BIN" ]; then
     rm -f "$AMAZON_BIN/*"
 else
