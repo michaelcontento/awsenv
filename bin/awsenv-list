@@ -7,14 +7,22 @@ AWSENV_ROOT="$(awsenv root)"
 AWSENV_DEFAULT="$(awsenv default)"
 
 ENVIRONMENTS="$(ls -1 "$AWSENV_ROOT/envs")"
-for environment in $ENVIRONMENTS; do
-    if [ "$environment" == "gitkeep" ]; then
+for NAME in $ENVIRONMENTS; do
+    if [ "$NAME" == "gitkeep" ]; then
         continue
     fi
 
-    if [ "$environment" == "$AWSENV_DEFAULT" ]; then
-        echo -e "$environment \033[32m(default)\033[0m"
+    if [ "$NAME" == "$AWSENV_NAME" ]; then
+        CURRENT=" \033[32m(current)\033[0m"
     else
-        echo "$environment"
+        CURRENT=""
     fi
+
+    if [ "$NAME" == "$AWSENV_DEFAULT" ]; then
+        DEFAULT=" \033[32m(default)\033[0m"
+    else
+        DEFAULT=""
+    fi
+
+    echo -e "$NAME$CURRENT$DEFAULT"
 done
