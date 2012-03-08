@@ -38,7 +38,12 @@ else
     mkdir "$AMAZON_BIN"
 fi
 
-# TODO Detect and handle errors here
+if [ ! -w "$AMAZON_BIN" ]; then
+    awsenv version
+    echo "error: directory '${AMAZON_BIN/$HOME/~}' not writeable." >&2
+    exit 1
+fi
+
 find "$AWSENV_ROOT/amazon" \
     -type f \
     -wholename "*/bin/*" \
