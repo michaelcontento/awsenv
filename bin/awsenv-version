@@ -3,4 +3,4 @@
 set -e
 [ -n "$AWSENV_DEBUG" ] && set -x
 
-echo "awsenv 0.1.0"
+echo "awsenv 0.1.1"
