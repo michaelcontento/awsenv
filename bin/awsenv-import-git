@@ -23,11 +23,25 @@ if [ "$ALIAS" == "" ]; then
     ALIAS="${ALIAS%.git}"
 fi
 
-if [ -d "$ALIAS" ]; then
-    cd "$ALIAS"
-    git pull --quiet --ff-only --no-rebase 
-else
+if [ ! -d "$ALIAS" ]; then
     git clone --quiet "$PATH_" "$ALIAS"
+else
+    cd "$ALIAS"
+   
+    if [ ! -d ".git" ]; then
+        awsenv version
+        echo "error: existing environment doesn't look like a git repo." >&2
+        exit 1
+    fi
+
+    FOUND="$(grep "$PATH_" ".git/config" | wc -l | tr -d " ")"
+    if [ "$FOUND" == "0" ]; then
+        awsenv version
+        echo "error: environment already exists with other remote url." >&2
+        exit 1
+    fi
+
+    git pull --quiet --ff-only --no-rebase 
 fi
 
 if [ "$AWSENV_NAME" != "$ALIAS" ]; then
