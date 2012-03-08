@@ -17,12 +17,22 @@ cd "$AWSENV_ROOT/envs"
 PATH_="$1"
 ALIAS="$2"
 
-if [ "$ALIAS" != "" ]; then
-    git clone -q "$PATH_" "$ALIAS"
-else
-    git clone -q "$PATH_"
+if [ "$ALIAS" == "" ]; then
+    ALIAS="${PATH_##*:}"
+    ALIAS="${ALIAS##*/}"
+    ALIAS="${ALIAS%.git}"
 fi
 
-awsenv version
-echo "notice: the environment has to be selected / activated."
-echo "hint:   'awsenv use' and 'awsenv init' are the commands you're looking for."
+if [ -d "$ALIAS" ]; then
+    cd "$ALIAS"
+    git pull --quiet --ff-only --no-rebase 
+else
+    git clone --quiet "$PATH_" "$ALIAS"
+fi
+
+if [ "$AWSENV_NAME" != "$ALIAS" ]; then
+    awsenv version
+    echo "notice: the environment '$ALIAS' has to be selected / activated."
+    echo "hint:   use 'awsenv use $ALIAS' to use this environment as new default."
+    echo "hint:   or switch for current session only with: eval \"\$(awsenv init $ALIAS)\""
+fi
