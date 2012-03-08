@@ -29,5 +29,7 @@ fi
 
 echo "$NEW_DEFAULT" > "$AWSENV_ROOT/default"
 
-awsenv version
-echo "notice: the environment has to be activated with: eval \"\$(awsenv init -)\""
+if [ "$AWENV_NAME" != "$NEW_DEFAULT" ]; then
+    awsenv version
+    echo "notice: the environment has to be activated with: eval \"\$(awsenv init -)\""
+fi
