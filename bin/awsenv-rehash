@@ -23,8 +23,8 @@ AWSENV_ROOT="$(awsenv root)"
 AMAZON_BIN="$AWSENV_ROOT/amazon/bin"
 FILES_FOUND=$(ls -1 "$AMAZON_BIN" \
     | grep -v gitkeep \
-    | head -n-1 \
-    | wc -l)
+    | wc -l \
+    | tr -d " ")
 
 if [ "$FILES_FOUND" != "0" ] \
 && [ $FORCED -eq 0 ]; then
