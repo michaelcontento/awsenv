@@ -12,7 +12,7 @@ if [ $# -eq 0 ]; then
 fi
 
 AWSENV_ROOT="$(awsenv root)"
-cd "$AWSENV_ROOT/envs" 
+cd "$AWSENV_ROOT/envs"
 
 PATH_="$1"
 ALIAS="$2"
@@ -27,7 +27,7 @@ if [ ! -d "$ALIAS" ]; then
     git clone --quiet "$PATH_" "$ALIAS"
 else
     cd "$ALIAS"
-   
+
     if [ ! -d ".git" ]; then
         awsenv version
         echo "error: existing environment doesn't look like a git repo." >&2
@@ -41,7 +41,7 @@ else
         exit 1
     fi
 
-    git pull --quiet --ff-only --no-rebase 
+    git pull --quiet --ff-only --no-rebase
 fi
 
 if [ "$AWSENV_NAME" != "$ALIAS" ]; then

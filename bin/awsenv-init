@@ -12,7 +12,7 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-if [ "$1" == "-" ]; then 
+if [ "$1" == "-" ]; then
     DEFAULT="$(awsenv default)"
 
     if [ "$DEFAULT" == "" ]; then
@@ -28,15 +28,15 @@ AWSENV_ROOT="$(awsenv root)"
 ENVIRONMENT="$AWSENV_ROOT/envs/$DEFAULT"
 
 if [ ! -d "$ENVIRONMENT" ]; then
-    awsenv version
-    echo "error: there is no environment named '$DEFAULT'." >&2
+    echo "# $(awsenv version)"
+    echo "# error: there is no environment named '$DEFAULT'." >&2
     exit 1
 fi
 
-function exportAwsEnvGlobals() 
+function exportAwsEnvGlobals()
 {
     echo ""
-    echo "# Let others detect us" 
+    echo "# Let others detect us"
     echo "export AWSENV_LOADED=1"
     echo "export AWSENV_NAME='$DEFAULT'"
 }
@@ -100,11 +100,11 @@ function exportAwsIdentityFile()
     fi
 }
 
-function exportJavaHome() 
+function exportJavaHome()
 {
     local OSX_JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home/"
     local UBUNTU_JAVA_HOME="/usr/lib/jvm/java-6-openjdk/"
-    
+
     echo ""
     echo "# Try to ensure a valid JAVA_HOME"
     if [ "$JAVA_HOME" != "" ]; then

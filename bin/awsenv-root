@@ -4,7 +4,7 @@ set -e
 [ -n "$AWSENV_DEBUG" ] && set -x
 
 # Simpe function for resolving a relative path to an absolute one
-function realpath 
+function realpath
 {
     local path="$1"
     local cwd="$(pwd)"
@@ -19,7 +19,7 @@ function realpath
     cd "$cwd"
 }
 
-AWSENV_ROOT="$(realpath "$0")"   # Resolve this file 
-AWSENV_ROOT="${AWSENV_ROOT%/*}"  # And strip the "/bin" directory 
+AWSENV_ROOT="$(realpath "$0")"   # Resolve this file
+AWSENV_ROOT="${AWSENV_ROOT%/*}"  # And strip the "/bin" directory
 
 echo "$AWSENV_ROOT"
