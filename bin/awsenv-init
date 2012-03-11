@@ -33,6 +33,26 @@ if [ ! -d "$ENVIRONMENT" ]; then
     exit 1
 fi
 
+function globSingleFile()
+{
+    local start=$1
+    local end=$2
+    local result="$(echo "$start"*"$end")"
+
+    # The result can contain multiple results and that should lead to an error.
+    # How do we achieve this? Just check for single spaces in the result! But
+    # first we strip all escaped spaces, cause they are allowed and would lead
+    # to false positives.
+    local shouldNotBeEmpty="$(echo "$result" | sed 's/\\ //' | grep -v " ")"
+
+    if [ "$shouldNotBeEmpty" == "" ]; then
+        echo "# error: multiple files detected for '$start*$end'." >&2
+        result="$(echo "$result" | sed -r 's/([^\]) .*/\1/g')"
+    fi
+
+    echo "$result"
+}
+
 function exportAwsEnvGlobals()
 {
     echo ""
@@ -52,28 +72,29 @@ function exportAwsHomeDirectories()
 {
     echo ""
     echo "# Home directories for all CLI tools"
-    echo "export AWS_AUTO_SCALING_HOME='$(echo "$AWSENV_ROOT/amazon/AutoScaling-"*)'"
-    echo "export AWS_CLOUDFORMATION_HOME='$(echo "$AWSENV_ROOT/amazon/AWSCloudFormation-"*)'"
-    echo "export AWS_CLOUDWATCH_HOME='$(echo "$AWSENV_ROOT/amazon/CloudWatch-"*)'"
-    echo "export AWS_ELASTICACHE_HOME='$(echo "$AWSENV_ROOT/amazon/AmazonElastiCacheCli-"*)'"
-    echo "export AWS_ELB_HOME='$(echo "$AWSENV_ROOT/amazon/ElasticLoadBalancing-"*)'"
-    echo "export AWS_IAM_HOME='$(echo "$AWSENV_ROOT/amazon/IAMCli-"*)'"
-    echo "export AWS_RDS_HOME='$(echo "$AWSENV_ROOT/amazon/RDSCli-"*)'"
-    echo "export AWS_SNS_HOME='$(echo "$AWSENV_ROOT/amazon/SimpleNotificationServiceCli-"*)'"
-    echo "export EC2_AMITOOL_HOME='$(echo "$AWSENV_ROOT/amazon/ec2-ami-tools-"*)'"
-    echo "export EC2_HOME='$(echo "$AWSENV_ROOT/amazon/ec2-api-tools-"*)'"
+    echo "export AWS_AUTO_SCALING_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/AutoScaling-")'"
+    echo "export AWS_CLOUDFORMATION_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/AWSCloudFormation-")'"
+    echo "export AWS_CLOUDWATCH_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/CloudWatch-")'"
+    echo "export AWS_ELASTICACHE_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/AmazonElastiCacheCli-")'"
+    echo "export AWS_ELB_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/ElasticLoadBalancing-")'"
+    echo "export AWS_IAM_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/IAMCli-")'"
+    echo "export AWS_RDS_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/RDSCli-")'"
+    echo "export AWS_SNS_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/SimpleNotificationServiceCli-")'"
+    echo "export EC2_AMITOOL_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/ec2-ami-tools-")'"
+    echo "export EC2_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/ec2-api-tools-")'"
 }
 
 function exportAwsCredentials()
 {
-    local AWS_CREDENTIAL_FILE="$(echo "$ENVIRONMENT/credentials"*)"
-    local EC2_ACCESS_KEY="$(grep "AWSAccessKeyId" "$AWS_CREDENTIAL_FILE" | cut -d"=" -f2)"
-    local EC2_SECRET_KEY="$(grep "AWSSecretKey"   "$AWS_CREDENTIAL_FILE" | cut -d"=" -f2)"
-    local EC2_CERT="$(echo "$ENVIRONMENT/cert-"*)"
-    local EC2_PRIVATE_KEY="$(echo "$ENVIRONMENT/pk-"*)"
-
     echo ""
     echo "# Path to the credentials / keys"
+
+    local EC2_CERT="$(globSingleFile "$ENVIRONMENT/cert-")"
+    local EC2_PRIVATE_KEY="$(globSingleFile "$ENVIRONMENT/pk-")"
+    local AWS_CREDENTIAL_FILE="$(globSingleFile "$ENVIRONMENT/credentials")"
+    local EC2_ACCESS_KEY="$(grep "AWSAccessKeyId" "$AWS_CREDENTIAL_FILE" | cut -d"=" -f2)"
+    local EC2_SECRET_KEY="$(grep "AWSSecretKey"   "$AWS_CREDENTIAL_FILE" | cut -d"=" -f2)"
+
     echo "export AWS_CREDENTIAL_FILE='$AWS_CREDENTIAL_FILE'"
     echo "export EC2_CERT='$EC2_CERT'"
     echo "export EC2_PRIVATE_KEY='$EC2_PRIVATE_KEY'"
@@ -85,10 +106,10 @@ function exportAwsCredentials()
 
 function exportAwsIdentityFile()
 {
-    local AWS_IDENTITY_FILE="$(echo "$ENVIRONMENT/"*"-keypair")"
-
     echo ""
     echo "# Default ssh key"
+
+    local AWS_IDENTITY_FILE="$(globSingleFile "$ENVIRONMENT/" "-keypair")"
     echo "export AWS_IDENTITY_FILE='$AWS_IDENTITY_FILE'"
     echo "export AWS_SSH_KEY_ID='$(basename "$AWS_IDENTITY_FILE")'"
 
