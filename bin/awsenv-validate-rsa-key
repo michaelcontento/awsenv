@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$AWSENV_DEBUG" ] && set -x
+
+if [ $# -eq 0 ]; then
+    awsenv version
+    echo "usage: awsenv validate-rsa-key <path>"
+    echo ""
+    echo "error: no arguments given." >&2
+    exit 1
+fi
+
+FILE="$1"
+
+if [ ! -f "$FILE" ]; then
+    awsenv version
+    echo "error: given file does not exists." >&2
+    exit 1
+fi
+
+TOKEN_START="-----BEGIN RSA PRIVATE KEY-----"
+TOKEN_END="-----END RSA PRIVATE KEY-----"
+
+if [ "$(head -n1 "$FILE")" != "$TOKEN_START" ]; then
+    awsenv version
+    echo "error: start token ($TOKEN_START) missing." >&2
+    exit 1
+fi
+
+if [ "$(tail -n1 "$FILE")" != "$TOKEN_END" ]; then
+    awsenv version
+    echo "error: end token ($TOKEN_END) missing." >&2
+    exit 1
+fi

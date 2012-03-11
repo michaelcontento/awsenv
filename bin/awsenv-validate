@@ -3,6 +3,24 @@
 set -e
 [ -n "$AWSENV_DEBUG" ] && set -x
 
-# TODO Implement this
+if [ $# -eq 0 ]; then
+    awsenv version
+    echo "usage: awsenv use <environment>"
+    echo ""
+    echo "error: no arguments given." >&2
+    exit 1
+fi
 
-exit 0
+AWSENV_ROOT="$(awsenv root)"
+ENVIRONMENT="$AWSENV_ROOT/envs/$1"
+
+if [ ! -d "$ENVIRONMENT" ]; then
+    awsenv version
+    echo "error: there is no environment named '$NEW_DEFAULT'." >&2
+    exit 1
+fi
+
+awsenv validate-cert "$ENVIRONMENT/cert-"*
+awsenv validate-credentials "$ENVIRONMENT/credentials"
+awsenv validate-rsa-key "$ENVIRONMENT/"*"-keypair"
+awsenv validate-rsa-key "$ENVIRONMENT/pk-"*
