@@ -4,8 +4,8 @@ set -e
 [ -n "$AWSENV_DEBUG" ] && set -x
 
 COMMAND=$1
-case $COMMAND in 
-    "" | "-h" | "--help") 
+case $COMMAND in
+    "" | "-h" | "--help")
         awsenv help
         ;;
 
