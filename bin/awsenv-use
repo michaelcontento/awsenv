@@ -27,6 +27,8 @@ if [ ! -d "$ENVIRONMENT" ]; then
     exit 1
 fi
 
+awsenv validate "$NEW_DEFAULT"
+
 echo "$NEW_DEFAULT" > "$AWSENV_ROOT/default"
 
 if [ "$AWENV_NAME" != "$NEW_DEFAULT" ]; then

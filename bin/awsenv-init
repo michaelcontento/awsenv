@@ -119,9 +119,6 @@ function exportJavaHome()
     fi
 }
 
-# Stop if the there is something wrong with the environment 
-awsenv validate "$ENVIRONMENT"
-
 # Be sure that the amazon/bin folder is filled properly and up to date
 awsenv rehash
 
