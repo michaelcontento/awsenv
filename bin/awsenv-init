@@ -123,21 +123,27 @@ function exportAwsIdentityFile()
 
 function exportJavaHome()
 {
-    local osxJavaHome="/System/Library/Frameworks/JavaVM.framework/Home/"
-    local ubuntuJavaHome="/usr/lib/jvm/java-6-openjdk/"
-
     echo ""
     echo "# Try to ensure a valid JAVA_HOME"
     if [ "$JAVA_HOME" != "" ]; then
         echo "# ... already set and we obey"
-    elif [ -d "$osxJavaHome" ]; then
-        echo "export JAVA_HOME='$osxJavaHome'"
-    elif [ -d "$ubuntuJavaHome" ]; then
-        echo "export JAVA_HOME='$ubuntuJavaHome'"
-    else
-        echo "error: unable to detect JAVA_HOME" >&2
-        exit 1
+        return
     fi
+
+    local osxJavaHome="/System/Library/Frameworks/JavaVM.framework/Home/"
+    if [ -d "$osxJavaHome" ]; then
+        echo "export JAVA_HOME='$osxJavaHome'"
+        return
+    fi
+
+    local detected=$(readlink -f "$(which java)" | sed "s:jre/bin/java::")
+    if [ -d "$detected" ]; then
+        echo "export JAVA_HOME='$detected'"
+        return
+    fi
+
+    echo "error: unable to detect JAVA_HOME" >&2
+    exit 1
 }
 
 # Be sure that the amazon/bin folder is filled properly and up to date
