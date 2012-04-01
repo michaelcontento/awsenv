@@ -110,7 +110,7 @@ function exportAwsIdentityFile()
     echo "# Default ssh key"
 
     local awsIdentityFile="$(globSingleFile "$ENVIRONMENT/" "-keypair")"
-    echo "export awsIdentityFile='$awsIdentityFile'"
+    echo "export AWS_IDENTITY_FILE='$awsIdentityFile'"
     echo "export AWS_SSH_KEY_ID='$(basename "$awsIdentityFile")'"
 
     if [ -f "$awsIdentityFile" ] \
