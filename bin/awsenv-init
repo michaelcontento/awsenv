@@ -46,8 +46,15 @@ function globSingleFile()
     local shouldNotBeEmpty="$(echo "$result" | sed 's/\\ //' | grep -v " ")"
 
     if [ "$shouldNotBeEmpty" == "" ]; then
+        # Sed from OSX is a little bit old / different ...
+        if [ "$(uname -s)" == "Darwin" ]; then
+            local sedExtendedRegex="-E"
+        else
+            local sedExtendedRegex="-r"
+        fi
+
         echo "# error: multiple files detected for '$start*$end'." >&2
-        result="$(echo "$result" | sed -r 's/([^\]) .*/\1/g')"
+        result="$(echo "$result" | sed $sedExtendedRegex 's/([^\]) .*/\1/g')"
     fi
 
     echo "$result"
