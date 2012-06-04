@@ -126,7 +126,7 @@ This command helps you to import environments into [awsenv][]. Just read the
 help of this command, checkout the [awsenv-example-env][] repository and you 
 should be able to setup all required files without any problems.
 
-	$ awsenv import git git://github.com/michaelcontento/awsenv-example-env.git example
+    $ awsenv import git git://github.com/michaelcontento/awsenv-example-env.git example
 
 Currently only environments stored as [Git][] repository are supported. But you 
 can help to expand this list by simply creating a new executable named 
