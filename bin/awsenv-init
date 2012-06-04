@@ -153,6 +153,21 @@ function exportJavaHome()
     exit 1
 }
 
+function exportCustomConfig()
+{
+    echo ""
+    echo "# Custom configuration"
+
+    local configFile="$ENVIRONMENT/config"
+
+    if [ ! -e "$configFile" ]; then
+        echo "# ... no custom configuration found"
+        return
+    fi
+
+    cat "$configFile"
+}
+
 # Be sure that the amazon/bin folder is filled properly and up to date
 awsenv rehash
 
@@ -163,3 +178,4 @@ exportAwsHomeDirectories
 exportAwsCredentials
 exportAwsIdentityFile
 exportJavaHome
+exportCustomConfig
