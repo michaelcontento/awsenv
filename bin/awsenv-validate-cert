@@ -13,23 +13,22 @@ fi
 
 FILE="$1"
 
-if [ ! -f "$FILE" ]; then
-    awsenv version
-    echo "error: file '$FILE' does not exists." >&2
-    exit 1
+if [ -f "$FILE" ]; then
+    TOKEN_START="-----BEGIN CERTIFICATE-----"
+    TOKEN_END="-----END CERTIFICATE-----"
+
+    if [ "$(head -n1 "$FILE")" != "$TOKEN_START" ]; then
+        awsenv version
+        echo "error: certificate without start token ($TOKEN_START)." >&2
+        exit 1
+    fi
+
+    if [ "$(tail -n1 "$FILE")" != "$TOKEN_END" ]; then
+        awsenv version
+        echo "error: certificate without end token ($TOKEN_END)." >&2
+        exit 1
+    fi
+else
+    echo "warning: no EC2 certificate exists at '$FILE'." >&2
 fi
 
-TOKEN_START="-----BEGIN CERTIFICATE-----"
-TOKEN_END="-----END CERTIFICATE-----"
-
-if [ "$(head -n1 "$FILE")" != "$TOKEN_START" ]; then
-    awsenv version
-    echo "error: certificate without start token ($TOKEN_START)." >&2
-    exit 1
-fi
-
-if [ "$(tail -n1 "$FILE")" != "$TOKEN_END" ]; then
-    awsenv version
-    echo "error: certificate without end token ($TOKEN_END)." >&2
-    exit 1
-fi
