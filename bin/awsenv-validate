@@ -20,6 +20,9 @@ if [ ! -d "$ENVIRONMENT" ]; then
     exit 1
 fi
 
+# NOTE: EC2_CERT and EC2_PRIVATE_KEY are deprecated -- those warnings could be
+# removed entirely:
+#   http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/CLTRG-common-args-api.html
 awsenv validate-cert "$ENVIRONMENT/cert-"*
 awsenv validate-credentials "$ENVIRONMENT/credentials"
 awsenv validate-rsa-key "$ENVIRONMENT/"*"-keypair"
