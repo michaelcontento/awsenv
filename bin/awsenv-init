@@ -103,8 +103,23 @@ function exportAwsCredentials()
     local ec2SecretKey="$(grep "AWSSecretKey"   "$awsCredentialFile" | cut -d"=" -f2)"
 
     echo "export AWS_CREDENTIAL_FILE='$awsCredentialFile'"
-    echo "export EC2_CERT='$ec2Cert'"
-    echo "export EC2_PRIVATE_KEY='$ec2PrivateKey'"
+
+    if [ -f "$ec2Cert" ]; then
+        echo "export EC2_CERT='$ec2Cert'"
+    else
+        echo ""
+        echo "# No X.509 certificates for EC2 found."
+        echo "unset EC2_CERT"
+    fi
+
+    if [ -f "$ec2PrivateKey" ]; then
+        echo "export EC2_PRIVATE_KEY='$ec2PrivateKey'"
+    else
+        echo ""
+        echo "# No EC2 private key file found."
+        echo "unset EC2_PRIVATE_KEY"
+    fi
+
     echo ""
     echo "# EC2 still needs the keys as separate variables"
     echo "export EC2_ACCESS_KEY='$ec2AccessKey'"
@@ -114,17 +129,22 @@ function exportAwsCredentials()
 function exportAwsIdentityFile()
 {
     echo ""
-    echo "# Default ssh key"
 
     local awsIdentityFile="$(globSingleFile "$ENVIRONMENT/" "-keypair")"
-    echo "export AWS_IDENTITY_FILE='$awsIdentityFile'"
-    echo "export AWS_SSH_KEY_ID='$(basename "$awsIdentityFile")'"
 
-    if [ -f "$awsIdentityFile" ] \
-    && [ -x "$(command -v ssh-add || true)" ]; then
-        echo "# ... also added to your ssh agent"
-        chmod 600 "$awsIdentityFile"
-        ssh-add "$awsIdentityFile" &> /dev/null
+    if [ -f "$awsIdentityFile" ]; then
+        echo "# Default ssh key"
+        echo "export AWS_IDENTITY_FILE='$awsIdentityFile'"
+        echo "export AWS_SSH_KEY_ID='$(basename "$awsIdentityFile")'"
+
+        if [ -x "$(command -v ssh-add || true)" ]; then
+            echo "# ... also added to your ssh agent"
+            chmod 600 "$awsIdentityFile"
+            ssh-add "$awsIdentityFile" &> /dev/null
+        fi
+    else
+        echo "# No EC2 SSH keypair found."
+        echo "unset AWS_IDENTITY_FILE AWS_SSH_KEY_ID"
     fi
 }
 
@@ -179,3 +199,4 @@ exportAwsCredentials
 exportAwsIdentityFile
 exportJavaHome
 exportCustomConfig
+
