@@ -2,8 +2,7 @@
 
 [awsenv][] lets you easily switch between multiple [AWS][] environments. It's
 simple, unobtrusive, and follows the UNIX tradition of single-purpose tool that
-do one thing well. It also includes the latest versions of the [AWS][] CLI tools
-, so that you're ready to go in few seconds.
+do one thing well.
 
 [awsenv][] is heavily inspired by [rbenv][] from [sstephenson][].
 
@@ -75,14 +74,11 @@ command does:
 1. Executes `awsenv rehash`
 2. Expose the usage of [awsenv][] to the world with the variables described
 below
-3. Prefix your current `PATH` with `~/.awsenv/amazon/bin` so that all [AWS][]
-CLI tools are available
-4. Configures various variables required by the [AWS][] tools:
-    * `AWS_${TOOL}_HOME` for all tools
+3. Configures various variables required by the [AWS][] tools:
     * Credential variables (e.g. `AWS_CREDENTIAL_FILE`)
     * Variables regarding the used identity file (e.g. `AWS_IDENTITY_FILE`)
     * Try to define `JAVA_HOME`, if not already set
-5. Add the used identity file to the `ssh-agent`
+4. Add the used identity file to the `ssh-agent`
 
 Run `awsenv init -` for yourself to see exactly what happens under the hood.
 

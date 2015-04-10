@@ -68,29 +68,6 @@ function exportAwsEnvGlobals()
     echo "export AWSENV_NAME='$DEFAULT'"
 }
 
-function exportNewPath()
-{
-    echo ""
-    echo "# Append the combined bin-path to the users PATH"
-    echo "export PATH=\"$AWSENV_ROOT/amazon/bin:\$PATH\""
-}
-
-function exportAwsHomeDirectories()
-{
-    echo ""
-    echo "# Home directories for all CLI tools"
-    echo "export AWS_AUTO_SCALING_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/AutoScaling-")'"
-    echo "export AWS_CLOUDFORMATION_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/AWSCloudFormation-")'"
-    echo "export AWS_CLOUDWATCH_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/CloudWatch-")'"
-    echo "export AWS_ELASTICACHE_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/AmazonElastiCacheCli-")'"
-    echo "export AWS_ELB_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/ElasticLoadBalancing-")'"
-    echo "export AWS_IAM_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/IAMCli-")'"
-    echo "export AWS_RDS_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/RDSCli-")'"
-    echo "export AWS_SNS_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/SimpleNotificationServiceCli-")'"
-    echo "export EC2_AMITOOL_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/ec2-ami-tools-")'"
-    echo "export EC2_HOME='$(globSingleFile "$AWSENV_ROOT/amazon/ec2-api-tools-")'"
-}
-
 function exportAwsCredentials()
 {
     echo ""
@@ -196,8 +173,6 @@ awsenv rehash
 
 # And now export everything
 exportAwsEnvGlobals
-exportNewPath
-exportAwsHomeDirectories
 exportAwsCredentials
 exportAwsIdentityFile
 exportJavaHome
