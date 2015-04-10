@@ -71,14 +71,13 @@ argument. The most common subcommands are:
 This is the only command that will modify your current shell. Here is what this
 command does:
 
-1. Executes `awsenv rehash`
-2. Expose the usage of [awsenv][] to the world with the variables described
+1. Exposes the usage of [awsenv][] to the world with the variables described
 below
-3. Configures various variables required by the [AWS][] tools:
+2. Configures various variables required by the [AWS][] tools:
     * Credential variables (e.g. `AWS_CREDENTIAL_FILE`)
     * Variables regarding the used identity file (e.g. `AWS_IDENTITY_FILE`)
     * Try to define `JAVA_HOME`, if not already set
-4. Add the used identity file to the `ssh-agent`
+3. Add the used identity file to the `ssh-agent`
 
 Run `awsenv init -` for yourself to see exactly what happens under the hood.
 
@@ -105,16 +104,6 @@ All environments are stored as seperate directory in `~/.awsenv/env`.
 Display a list of all currently installed environments.
 
     $ awsenv list
-
-### awsenv rehash
-
-The [AWS][] CLI tools are located in `~/.awsenv/amazon` and *every* tool has his
-own `/bin` directory for the executables. But if we would use these, your `PATH`
-variable would be unreadable long. [awsenv][] avoids this by creating symlinks
-for all executables in one directory called `~/.awsenv/amazon/bin`. And creating
-these symlinks is the job of `awsenv rehash`.
-
-    $ awsenv rehash
 
 ### awsenv import
 
