@@ -168,9 +168,6 @@ function exportCustomConfig()
     cat "$configFile"
 }
 
-# Be sure that the amazon/bin folder is filled properly and up to date
-awsenv rehash
-
 # And now export everything
 exportAwsEnvGlobals
 exportAwsCredentials
