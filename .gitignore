@@ -1,11 +1,3 @@
-# Include all jar files (if excluded in a global .gitexclude ...)
-!*.jar
-
-# The amazon/bin folder contains symlinks to the real executables. We don't need
-# to track those files, because they are generated with awsenv-rehash.
-amazon/bin/*
-!amazon/bin/.gitkeep
-
 # Contains the users environments and SHOULD NOT be commited
 envs/*
 !envs/.gitkeep
