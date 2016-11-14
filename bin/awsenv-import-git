@@ -3,11 +3,11 @@
 set -e
 [ -n "$AWSENV_DEBUG" ] && set -x
 
-if [ $# -eq 0 ]; then
+if [ $# -lt 2 ]; then
     awsenv version
     echo "usage: awsenv import-git <path> [alias]"
     echo ""
-    echo "error: no arguments given." >&2
+    echo "error: not enough arguments given." >&2
     exit 1
 fi
 

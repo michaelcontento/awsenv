@@ -76,7 +76,6 @@ below
 2. Configures various variables required by the [AWS][] tools:
     * Credential variables (e.g. `AWS_CREDENTIAL_FILE`)
     * Variables regarding the used identity file (e.g. `AWS_IDENTITY_FILE`)
-    * Try to define `JAVA_HOME`, if not already set
 3. Add the used identity file to the `ssh-agent`
 
 Run `awsenv init -` for yourself to see exactly what happens under the hood.
@@ -113,8 +112,11 @@ should be able to setup all required files without any problems.
 
     $ awsenv import git git://github.com/michaelcontento/awsenv-example-env.git example
 
-Currently only environments stored as [Git][] repository are supported. But you 
-can help to expand this list by simply creating a new executable named 
+Import also supports importing your local ` ~/.aws/credentials ` file which is being used by [AWS CLI](https://aws.amazon.com/cli/). It only supports importing your keys at the moment.
+
+    $ awsenv import local
+
+You can help to expand this list by simply creating a new executable named
 `awsenv-import-<TYPE>`. Pull requests are welcome!
 
 ## Development

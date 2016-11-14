@@ -3,7 +3,7 @@
 set -e
 [ -n "$AWSENV_DEBUG" ] && set -x
 
-if [ $# -lt 2 ]; then
+if [ $# -lt 1 ]; then
     awsenv version
     echo "usage: awsenv import <type> <path> [alias]"
     echo ""

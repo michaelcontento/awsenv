@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$AWSENV_DEBUG" ] && set -x
+
+if [ $# -eq 0 ]; then
+    awsenv version
+    echo "usage: awsenv import-local <path>"
+    echo ""
+    echo "error: no arguments given." >&2
+    exit 1
+fi
+
+AWSENV_ROOT="$(awsenv root)"
+cd "$AWSENV_ROOT/envs"
+
+PATH_="${1:-$HOME/.aws/credentials}"
+
+PROFILES="$(grep -E '\[|\]' "$PATH_" | tr -d '[]')"
+
+echo "importing shared credentials from $PATH_"
+
+for PROFILE in $PROFILES; do
+    [ ! -d "$PROFILE" ] && mkdir "$PROFILE"
+    echo AWSAccessKeyId=$(aws configure get aws_access_key_id --profile $PROFILE) > "$PROFILE/credentials"
+    echo AWSSecretKey=$(aws configure get aws_secret_access_key --profile $PROFILE) >> "$PROFILE/credentials"
+    echo "export EC2_REGION=$(aws configure get region --profile $PROFILE)" > "$PROFILE/config"
+done
+
+awsenv version
+echo "notice: the environment has to be selected / activated."
+echo "hint:   use 'awsenv list' list environment"
+echo "hint:   or switch for current session only with: eval \"\$(awsenv init <environment>)\""
